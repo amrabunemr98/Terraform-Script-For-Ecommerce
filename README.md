@@ -1,10 +1,10 @@
 <div align="center">
-  <h1 style="color: red;"> E-Commerce Application Deployment </h1>
+  <h1 style="color: red;"> E-Commerce Application Deployment 🛒</h1>
 </div>
 
-This repository contains the necessary scripts and configurations to deploy an eCommerce application architecture using Terraform and GitHub Actions. The architecture includes a Node.js frontend, a Laravel PHP backend, and a MySQL database hosted on AWS. 🛒💻
+This repository contains the necessary scripts and configurations to deploy an eCommerce application architecture using Terraform and GitHub Actions. The architecture includes a Node.js frontend, a Laravel PHP backend, and a MySQL database hosted on AWS.
 
-## Table of Contents
+## Table of Contents 📚
 
 1. [Architecture Overview](#architecture-overview)
 2. [Task Group A: Terraform Scripts](#task-group-a-terraform-scripts)
@@ -17,7 +17,7 @@ This repository contains the necessary scripts and configurations to deploy an e
    - [Backend Deployment](#backend-deployment)
 4. [Task Group C: Migration Plan](#task-group-c-migration-plan)
 
-## Architecture Overview
+## Architecture Overview 🌐
 
 The application architecture consists of the following components:
 
@@ -25,14 +25,14 @@ The application architecture consists of the following components:
 - **Backend**: Laravel PHP application running on Ubuntu 22.04.
 - **Database**: MySQL Community version 8 hosted on RDS (with no internet exposure).
 
-## Task Group A: Terraform Scripts
+## Task Group A: Terraform Scripts ⚙️
 
 ### Requirements
 
 - Terraform installed on your machine.
 - AWS account with proper IAM permissions.
 
-### Resources Created
+### Resources Created 🛠️
 
 The following resources are created using the Terraform script:
 
@@ -55,7 +55,7 @@ The following resources are created using the Terraform script:
    - Type: Lowest plan
    - Internet Exposure: No
 
-### Usage
+### Usage 📝
 
 1. Clone the repository:
    ```bash
@@ -78,13 +78,13 @@ The following resources are created using the Terraform script:
    terraform apply
    ```
 
-## Task Group B: GitHub Actions CI/CD
+## Task Group B: GitHub Actions CI/CD 🚀
 
 ### Overview
 
 This section automates the deployment of the Node.js frontend and Laravel PHP backend applications using GitHub Actions.
 
-### Frontend Deployment
+### Frontend Deployment 🌟
 
 Any update on the main branch of the frontend repository will trigger the following steps:
 
@@ -156,7 +156,7 @@ jobs:
 ```
 [View Frontend CI/CD Workflow](https://github.com/amrabunemr98/NodeJs-app-Frontend/blob/master/.github/workflows/ci-cd.yml)
 
-### Backend Deployment
+### Backend Deployment 🏗️
 
 Any update on the main branch of the Laravel PHP app repository will trigger an automatic deployment that executes a shell script to:
 
@@ -228,20 +228,20 @@ jobs:
 ```
 [View Backend CI/CD Workflow](https://github.com/amrabunemr98/Laravel-php-app-backend/blob/11.x/.github/workflows/ci-cd.yml)
 
-## Task Group C: Migration Plan
+## Task Group C: Migration Plan 🔄
 
 ### Migration Plan from AWS to Azure Using RackWare and Azure DMS
 
 #### 1. RackWare Overview
 **RackWare Management Module (RMM)** is a cloud management platform that automates and manages migration processes. It allows for the provisioning of Azure machines that replicate the specifications of existing AWS instances.
 
-#### 2. Key Features for Migration
+#### 2. Key Features for Migration ✨
 - **Auto-Provisioning**: Automatically provisions Azure VMs with configurations matching existing AWS instances (CPU, memory, disk size, and network settings).
 - **Workload Discovery**: Scans the AWS environment to identify and catalog running workloads, their configurations, and dependencies.
 - **Seamless Migration**: Facilitates simultaneous data transfer and VM provisioning, reducing downtime.
 - **Flexible Network Configuration**: Configures networking options to match AWS setups or customize for Azure.
 
-#### 3. Migration Process Using RackWare
+#### 3. Migration Process Using RackWare 📦
 ##### Step 1: Assessment and Planning
 - Assess the current AWS environment using RackWare to gather details about all instances and their configurations.
 
@@ -252,10 +252,10 @@ jobs:
 ##### Step 3: Workload Discovery
 - Initiate a workload discovery process where RackWare identifies all running instances, specifications, and dependencies in AWS.
 
-##### Step 4: Configure Azure Environment
-- Set up the Azure environment using RackWare, including resource groups, networks, and required
+##### Step 
 
- permissions.
+4: Configure Azure Environment
+- Set up the Azure environment using RackWare, including resource groups, networks, and required permissions.
 
 ##### Step 5: Auto-Provisioning of Azure VMs
 - RackWare automatically provisions Azure VMs based on the discovered AWS instance configurations.
@@ -263,11 +263,11 @@ jobs:
 ##### Step 6: Data Migration
 - Use Azure Data Migration Service (DMS) in conjunction with RackWare to migrate databases from AWS RDS to Azure SQL Database.
 
-#### 4. Post-Migration Steps
+#### 4. Post-Migration Steps ✅
 - Validate the integrity and performance of migrated workloads on Azure.
 - Optimize configurations as needed based on Azure best practices.
 - Decommission AWS resources once validated.
 
-#### 5. Resources
+#### 5. Resources 🌐
 - [RackWare Documentation](https://rackware.com/documentation/)
 - [Azure DMS Documentation](https://learn.microsoft.com/en-us/azure/dms/dms-overview)
