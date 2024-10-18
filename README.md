@@ -1,7 +1,4 @@
-Here’s the updated `README.md` that includes the migration plan for Task Group C:
-
-```markdown
-# eCommerce Application Deployment
+# E-Commerce Application Deployment
 
 This repository contains the necessary scripts and configurations to deploy an eCommerce application architecture using Terraform and GitHub Actions. The architecture includes a Node.js frontend, a Laravel PHP backend, and a MySQL database hosted on AWS.
 
