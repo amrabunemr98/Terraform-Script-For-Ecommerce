@@ -254,9 +254,7 @@ jobs:
 - Set up the Azure environment using RackWare, including resource groups, networks, and required permissions.
 
 ##### Step 5: Auto-Provisioning of Azure VMs
-- RackWare automatically provisions Azure VMs based on the discovered AWS instance
-
- configurations.
+- RackWare automatically provisions Azure VMs based on the discovered AWS instance configurations.
 
 ##### Step 6: Data Migration
 - Use Azure Data Migration Service (DMS) in conjunction with RackWare to migrate databases from AWS RDS to Azure SQL Database.
