@@ -1,4 +1,3 @@
-```markdown
 # eCommerce Application Deployment
 
 This repository contains the necessary scripts and configurations to deploy an eCommerce application architecture using Terraform and GitHub Actions. The architecture includes a Node.js frontend, a Laravel PHP backend, and a MySQL database hosted on AWS.
