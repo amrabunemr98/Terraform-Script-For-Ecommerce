@@ -94,7 +94,66 @@ Any update on the main branch of the frontend repository will trigger the follow
 
 #### GitHub Action Configuration
 ```yaml
-# ci-cd.yml for frontend
+name: Laravel CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  php-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Update with your region
+
+      - name: SSH into EC2 and run tests
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+          chmod 400 key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@${{ secrets.EC2_PUBLIC_IP }} << EOF
+            echo "Running tests on EC2..."
+            cd /path/to/your/project
+            composer install
+            php artisan test
+          EOF
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: php-tests
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Update with your region
+
+      - name: SSH into EC2 and deploy
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+          chmod 400 key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@${{ secrets.EC2_PUBLIC_IP }} << EOF
+            echo "Deploying to production..."
+            cd /path/to/your/project
+            # Add your deployment commands here
+            php artisan migrate --force
+          EOF
 ```
 [View Frontend CI/CD Workflow](https://github.com/amrabunemr98/NodeJs-app-Frontend/blob/master/.github/workflows/ci-cd.yml)
 
@@ -107,7 +166,63 @@ Any update on the main branch of the Laravel PHP app repository will trigger an 
 
 #### GitHub Action Configuration
 ```yaml
-# ci-cd.yml for backend
+name: Node.js CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Update with your region
+
+      - name: SSH into EC2 and run build commands
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+          chmod 400 key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@${{ secrets.EC2_PUBLIC_IP }} << EOF
+            echo "Running build commands on EC2..."
+            cd /path/to/your/project  # Update with the correct path to your project
+            npm install  # Install dependencies
+            npm test     # Run tests
+          EOF
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Update with your region
+
+      - name: SSH into EC2 and deploy
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+          chmod 400 key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@${{ secrets.EC2_PUBLIC_IP }} << EOF
+            echo "Deploying to production..."
+            cd /path/to/your/project  # Update with the correct path to your project
+            npm install --production  # Install production dependencies
+            npm run build             # Run build command if applicable
+            # Add any other deployment commands here
+          EOF
 ```
 [View Backend CI/CD Workflow](https://github.com/amrabunemr98/Laravel-php-app-backend/blob/11.x/.github/workflows/ci-cd.yml)
 
