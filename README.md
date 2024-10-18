@@ -2,7 +2,7 @@
   <h1 style="color: red;"> E-Commerce Application Deployment </h1>
 </div>
 
-This repository contains the necessary scripts and configurations to deploy an eCommerce application architecture using Terraform and GitHub Actions. The architecture includes a Node.js frontend, a Laravel PHP backend, and a MySQL database hosted on AWS.
+This repository contains the necessary scripts and configurations to deploy an eCommerce application architecture using Terraform and GitHub Actions. The architecture includes a Node.js frontend, a Laravel PHP backend, and a MySQL database hosted on AWS. 🛒💻
 
 ## Table of Contents
 
@@ -253,7 +253,9 @@ jobs:
 - Initiate a workload discovery process where RackWare identifies all running instances, specifications, and dependencies in AWS.
 
 ##### Step 4: Configure Azure Environment
-- Set up the Azure environment using RackWare, including resource groups, networks, and required permissions.
+- Set up the Azure environment using RackWare, including resource groups, networks, and required
+
+ permissions.
 
 ##### Step 5: Auto-Provisioning of Azure VMs
 - RackWare automatically provisions Azure VMs based on the discovered AWS instance configurations.
@@ -269,4 +271,3 @@ jobs:
 #### 5. Resources
 - [RackWare Documentation](https://rackware.com/documentation/)
 - [Azure DMS Documentation](https://learn.microsoft.com/en-us/azure/dms/dms-overview)
-
